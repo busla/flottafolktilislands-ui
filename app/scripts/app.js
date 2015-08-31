@@ -345,7 +345,7 @@ var App = React.createClass({
                   <a href="#"><div className="circle-tile-heading red"><i className="fa fa-users fa-fw fa-3x"></i></div></a>
                   <div className="circle-tile-content red">
                     <div className="circle-tile-number text-faded ">{this.state.statistics.totalRefugees}</div>                
-                    <div className="circle-tile-description text-faded"> Heimili </div>
+                    <div className="circle-tile-description text-faded"> Flóttamenn </div>
                   </div>
                 </div>
               </div> 
