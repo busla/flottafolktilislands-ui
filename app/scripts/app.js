@@ -14,7 +14,7 @@ var MunicipalityOption = React.createClass({
 });
 var HomeForm = React.createClass({
 
-  handleSubmit: function(e) {  
+  handleSubmit: function(e) {    
     e.preventDefault();  
     var name = React.findDOMNode(this.refs.name).value.trim();
     var ssn = React.findDOMNode(this.refs.ssn).value.trim();
@@ -22,8 +22,9 @@ var HomeForm = React.createClass({
     var municipality = React.findDOMNode(this.refs.municipality).value.trim();    
     var refugees = React.findDOMNode(this.refs.refugees).value.trim();
     var money = React.findDOMNode(this.refs.money).value.trim();
+    var re = /\S+@\S+\.\S+/;    
     
-    if (name !== '' && email !== '' && municipality !== '' && ssn !== '') {
+    if (name !== '' && (re.test(email)) && municipality !== '' && ssn !== '') {
       this.props.onHomeSubmit(
         {
           name: name, 
@@ -33,22 +34,23 @@ var HomeForm = React.createClass({
           refugees: refugees,
           money: money
         }
-      );      
+      );  
+
+      React.findDOMNode(this.refs.name).value = '';
+      React.findDOMNode(this.refs.nameGroup).classList.add('has-warning');
+      React.findDOMNode(this.refs.nameGlyph).classList.add('glyphicon-warning-sign');
+
+      React.findDOMNode(this.refs.ssn).value = '';
+      React.findDOMNode(this.refs.ssnGroup).classList.add('has-warning');
+      React.findDOMNode(this.refs.ssnGlyph).classList.add('glyphicon-warning-sign');
+
+      React.findDOMNode(this.refs.email).value = '';
+      React.findDOMNode(this.refs.emailGroup).classList.add('has-warning');
+      React.findDOMNode(this.refs.emailGlyph).classList.add('glyphicon-warning-sign');
+
+      React.findDOMNode(this.refs.municipality).value = 'Reykjavík';
     }
 
-    React.findDOMNode(this.refs.name).value = '';
-    React.findDOMNode(this.refs.nameGroup).classList.add('has-warning');
-    React.findDOMNode(this.refs.nameGlyph).classList.add('glyphicon-warning-sign');
-
-    React.findDOMNode(this.refs.ssn).value = '';
-    React.findDOMNode(this.refs.ssnGroup).classList.add('has-warning');
-    React.findDOMNode(this.refs.ssnGlyph).classList.add('glyphicon-warning-sign');
-
-    React.findDOMNode(this.refs.email).value = '';
-    React.findDOMNode(this.refs.emailGroup).classList.add('has-warning');
-    React.findDOMNode(this.refs.emailGlyph).classList.add('glyphicon-warning-sign');
-
-    React.findDOMNode(this.refs.municipality).value = 'Reykjavík';
 
 
   },
