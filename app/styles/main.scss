@@ -1,13 +1,18 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "bootswatch";
-@import "variables";
+
+
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "../bower_components/bootswatch-scss/superhero/variables";
+@import "../bower_components/bootswatch-scss/superhero/bootswatch";
 
 /* Main.css */
+html {
+    font-family: $font-family-sans-serif;
+}
 
 .panel-body {
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .footer {
@@ -43,6 +48,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .circle-tile-description {
     text-transform: uppercase;
     padding-bottom: 20px;
+    font-size: 30px;
 }
 .circle-tile-footer {
     background-color: rgba(0, 0, 0, 0.1);

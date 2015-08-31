@@ -314,10 +314,10 @@ var App = React.createClass({
               <div className="panel-body">
                 <p>
                 Undanfarnar vikur hafa hörmuleg örlög flóttafólks sem hafa reynt flýja stríðsástand og skapa sér framtíð í Evrópu varla farið fram hjá neinum.</p>
-                <p>Á meðan Evrópulöndin reyna að koma ábyrgðinni hvert yfir á annað og loka landamærum sínum mun ástandið einungis versna. Við horfum nú upp á það að fólk sem flýr stríðsátök til að leita að öryggi deyr í staðinn við það að komast yfir landamæri.</p> 
+                <p>Á meðan Evrópulöndin reyna að koma ábyrgðinni hvert yfir á annað og loka landamærum sínum mun ástandið einungis versna. Við horfum nú upp á það að fólk sem flýr stríð í sínu heimalandi deyr við landamæri Evrópu.</p> 
                 <p>Ísland hefur boðist til að taka við 50 flóttamönnum frá Sýrlandi á sama tíma og þau vísa flóttafólki úr landi sem komast hingað á eigin vegum. Þau þurfa húsaskjól og mat þar til þau hafa náð að koma undir sig fótunum. </p>
-                <p>Ef stjórnvöld vilja ekki sjá til þess að fleiri flóttamenn komist hingað skulum við, almenningur, gera það. Íslensk stjórnvöld geta bjargað mannslífum með einu pennastriki. Það er nóg pláss, nógur matur og næg vinna til staðar.</p> 
-                <p>Með því að skrá þig hér verður það ljóst að ábyrgðin liggur hjá stjórnvöldum. Ef til þess kæmi að stjórnvöld myndu veita flóttamönnum dvalarleyfi, hvernig gætir þú hjálpað?</p>                
+                <p>Þegar tölur eru bornar saman við önnur Evrópuríki er ljóst að stjórnvöld VILJA ekki taka við fleiri flóttamönnum. Íslensk stjórnvöld geta bjargað mannslífum með einu pennastriki. Það er nóg pláss, nógur matur og næg vinna til staðar.</p> 
+                <p>Niðurstöðurnar úr þessari könnun mun varpa ljósi á hvar ábyrgðin liggur. Ef til þess kæmi að stjórnvöld myndu veita flóttamönnum dvalarleyfi, hvernig gætir þú hjálpað?</p>                
               </div>
             </div>
           </div>
