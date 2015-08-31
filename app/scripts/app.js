@@ -291,7 +291,7 @@ var App = React.createClass({
         
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error("http://localhost:1337/home/add", status, err.toString());
+        console.error(this.props.url+"/home/add", status, err.toString());
       }.bind(this)
     });
   },
@@ -478,4 +478,4 @@ var MUNICIPALITIES = [
   'Suðurland',
 ].sort();
 
-React.render(<App url="http://localhost:1337" />, document.getElementById('app') );
+React.render(<App url="http://127.0.0.1:1337" />, document.getElementById('app') );
