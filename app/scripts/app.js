@@ -478,4 +478,4 @@ var MUNICIPALITIES = [
   'Suðurland',
 ].sort();
 
-React.render(<App url="http://127.0.0.1:1337" />, document.getElementById('app') );
+React.render(<App url="http://45.79.178.154:1337" />, document.getElementById('app') );
