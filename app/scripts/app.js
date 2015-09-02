@@ -3,7 +3,6 @@
 var React = require('react');
 var Kennitala = require('kennitala-js');
 
-
 var MunicipalityOption = React.createClass({
   render: function() {
     return (
@@ -314,7 +313,8 @@ var App = React.createClass({
     });
   },
 
-  render: function(){ 
+  render: function(){
+
     var alert = 'Skráningin þín tókst!';
     
     if (this.state.statistics.length === 0) {
@@ -353,7 +353,7 @@ var App = React.createClass({
                   <a href="#"><div className="circle-tile-heading dark-blue"><i className="fa fa-money fa-fw fa-3x"></i></div></a>
                   <div className="circle-tile-content dark-blue">                    
                     <div className="circle-tile-number text-faded ">{this.state.statistics.totalMoney}</div>
-                    <div className="circle-tile-description text-faded"> Krónur </div>
+                    <div className="circle-tile-description text-faded"> Krónur á mán.</div>
                   </div>
                 </div>
               </div>   
