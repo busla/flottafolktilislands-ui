@@ -14,6 +14,14 @@ var MunicipalityOption = React.createClass({
 });
 var HomeForm = React.createClass({
 
+  getInitialState: function() {
+    return {
+      validSsn: false,
+      validName: false,
+      validEmail: false
+    }
+  },
+
   handleSubmit: function(e) {    
     e.preventDefault();  
     var name = React.findDOMNode(this.refs.name).value.trim();
@@ -35,21 +43,24 @@ var HomeForm = React.createClass({
           money: money
         }
       );  
-
-      React.findDOMNode(this.refs.name).value = '';
-      React.findDOMNode(this.refs.nameGroup).classList.add('has-warning');
-      React.findDOMNode(this.refs.nameGlyph).classList.add('glyphicon-warning-sign');
-
-      React.findDOMNode(this.refs.ssn).value = '';
-      React.findDOMNode(this.refs.ssnGroup).classList.add('has-warning');
-      React.findDOMNode(this.refs.ssnGlyph).classList.add('glyphicon-warning-sign');
-
-      React.findDOMNode(this.refs.email).value = '';
-      React.findDOMNode(this.refs.emailGroup).classList.add('has-warning');
-      React.findDOMNode(this.refs.emailGlyph).classList.add('glyphicon-warning-sign');
-
-      React.findDOMNode(this.refs.municipality).value = 'Reykjavík';
     }
+  
+    React.findDOMNode(this.refs.name).value = '';
+    React.findDOMNode(this.refs.nameGroup).classList.remove('has-success');
+    React.findDOMNode(this.refs.nameGroup).classList.add('has-warning');
+    React.findDOMNode(this.refs.nameGlyph).classList.add('glyphicon-warning-sign');
+
+    React.findDOMNode(this.refs.ssn).value = '';
+    React.findDOMNode(this.refs.ssnGroup).classList.remove('has-success');
+    React.findDOMNode(this.refs.ssnGroup).classList.add('has-warning');
+    React.findDOMNode(this.refs.ssnGlyph).classList.add('glyphicon-warning-sign');
+
+    React.findDOMNode(this.refs.email).value = '';
+    React.findDOMNode(this.refs.emailGroup).classList.remove('has-success');
+    React.findDOMNode(this.refs.emailGroup).classList.add('has-warning');
+    React.findDOMNode(this.refs.emailGlyph).classList.add('glyphicon-warning-sign');
+
+    //React.findDOMNode(this.refs.municipality).value = 'Reykjavík';    
 
 
 
@@ -57,55 +68,62 @@ var HomeForm = React.createClass({
 
   changed: function(event){
     //this.props.onChange(this.props.model.cid, event.target.value);
-    console.log(event.target.value);
-    console.log(event.target.id);
+    //console.log(event.target.value);
+    //console.log(event.target.id);
+    
     switch (event.target.id) {
       case 'ssn':
         if(!Kennitala.validate(event.target.value)) {
           //console.log('Kennitalan er ekki rétt');
-          React.findDOMNode(this.refs.ssnGroup).classList.add('has-error');
-          React.findDOMNode(this.refs.ssnGlyph).classList.add('glyphicon-remove');
-          React.findDOMNode(this.refs.ssn).focus();
+          React.findDOMNode(this.refs.ssn).value = '';
+          this.setState({validSsn: false});
         }
         else {
-          React.findDOMNode(this.refs.ssnGlyph).classList.remove('glyphicon-remove');
-          React.findDOMNode(this.refs.ssnGlyph).classList.remove('glyphicon-warning-sign');
-          React.findDOMNode(this.refs.ssnGroup).classList.remove('has-error');
-          React.findDOMNode(this.refs.ssnGroup).classList.remove('has-warning');
-          React.findDOMNode(this.refs.ssnGroup).classList.add('has-success');
-          React.findDOMNode(this.refs.ssnGlyph).classList.add('glyphicon-ok');
+          this.setState({validSsn: true});        
         };
         break;
       case 'name':
         if(event.target.value !== '') {
-          React.findDOMNode(this.refs.nameGlyph).classList.remove('glyphicon-warning-sign');
-          React.findDOMNode(this.refs.nameGroup).classList.remove('has-warning');
-          React.findDOMNode(this.refs.nameGroup).classList.add('has-success');
-          React.findDOMNode(this.refs.nameGlyph).classList.add('glyphicon-ok');
-        };
+          this.setState({validName: true});
+        }
+        else {
+          this.setState({validName: false});
+        }
+
         break;
       case 'email':
         var re = /\S+@\S+\.\S+/;
         if(re.test(event.target.value)) {
-          React.findDOMNode(this.refs.emailGlyph).classList.remove('glyphicon-warning-sign');
-          React.findDOMNode(this.refs.emailGroup).classList.remove('has-warning');
-          React.findDOMNode(this.refs.emailGroup).classList.add('has-success');
-          React.findDOMNode(this.refs.emailGlyph).classList.add('glyphicon-ok');        
+          this.setState({validEmail: true});
+
         }
+        else {
+          React.findDOMNode(this.refs.email).value = '';
+          this.setState({validEmail: false});
+        };
         break;
     }
   },
 
   render: function() {
+    var tbsClasses = {
+      glyphWarning: "glyphicon glyphicon-warning-sign form-control-feedback",
+      glyphOk: "glyphicon glyphicon-ok form-control-feedback",
+      hasSuccess: "has-success form-group has-feedback",
+      hasWarning: "has-warning form-group has-feedback",
+    };
+
+    console.log(this.state.validEmail, this.state.validSsn, this.state.validName);
     var municipalitesList = [];
     for (var i = 0; i < MUNICIPALITIES.length; i++) {
       municipalitesList.push(<MunicipalityOption value={MUNICIPALITIES[i]} key={i}/>);
     }
 
+    this.props.isCurrent ? 'active' : null
     return (
 
       <form>
-        <div className="form-group has-warning has-feedback" ref="nameGroup">
+        <div className={this.state.validName ? tbsClasses.hasSuccess:tbsClasses.hasWarning} ref="nameGroup">
           <label htmlFor="name">Nafn</label>
           <input 
             type="text" 
@@ -115,10 +133,10 @@ var HomeForm = React.createClass({
             ref="name" 
             onBlur={this.changed} />
             <span 
-            className="glyphicon glyphicon-warning-sign form-control-feedback"
+            className={this.state.validName ? tbsClasses.glyphOk:tbsClasses.glyphWarning}
             ref="nameGlyph"></span>            
         </div>        
-        <div className="form-group has-warning has-feedback" ref="ssnGroup">
+        <div className={this.state.validSsn ? tbsClasses.hasSuccess:tbsClasses.hasWarning} ref="ssnGroup">
           <label htmlFor="ssn">Kennitala</label>
           <input 
             type="text" 
@@ -128,10 +146,10 @@ var HomeForm = React.createClass({
             ref="ssn" 
             onBlur={this.changed} />
             <span 
-            className="glyphicon glyphicon-warning-sign form-control-feedback"
+            className={this.state.validSsn ? tbsClasses.glyphOk:tbsClasses.glyphWarning}
             ref="ssnGlyph"></span>
         </div> 
-        <div className="form-group has-warning has-feedback" ref="emailGroup">
+        <div className={this.state.validEmail ? tbsClasses.hasSuccess:tbsClasses.hasWarning} ref="emailGroup">
           <label htmlFor="email">Netfang</label>
           <input 
             type="email" 
@@ -141,7 +159,7 @@ var HomeForm = React.createClass({
             ref="email" 
             onBlur={this.changed} />
             <span 
-            className="glyphicon glyphicon-warning-sign form-control-feedback"
+            className={this.state.validEmail ? tbsClasses.glyphOk:tbsClasses.glyphWarning}
             ref="emailGlyph"></span>            
         </div> 
         <div className="form-group has-success" ref="municipalityGroup">
@@ -219,7 +237,7 @@ var HomeForm = React.createClass({
               <option value="200000">200000 kr</option>
           </select>
         </div>     
-        <button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.handleSubmit} value="submit">Skrá mig!</button>
+        <button type="button" disabled={!this.state.validSsn || !this.state.validName || !this.state.validEmail} className="btn btn-primary btn-lg btn-block" onClick={this.handleSubmit} value="submit">Skrá mig!</button>
       </form>
     );
   }
@@ -231,7 +249,7 @@ var Success = React.createClass({
   render: function() {
     if (this.props.done) {
       return (
-        <div className="alert alert-success" role="alert">{this.props.alert}</div>
+        <div className="alert alert-success" role="alert"><strong>{this.props.alert}</strong></div>
       );          
     }
     else {
@@ -248,7 +266,7 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       done: false,
-      statistics: {} 
+      statistics: {},
     }
   },
   
@@ -291,13 +309,14 @@ var App = React.createClass({
         
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url+"/home/add", status, err.toString());
+        console.error(this.props.url+"/home/create", status, err.toString());
       }.bind(this)
     });
   },
 
   render: function(){ 
     var alert = 'Skráningin þín tókst!';
+    
     if (this.state.statistics.length === 0) {
       console.log(this.state.statistics);      
       return (
@@ -324,7 +343,7 @@ var App = React.createClass({
             
           <div className="col-xs-12 col-sm-4">
             <h1 className="text-center">Skráning</h1>
-            <HomeForm onHomeSubmit={this.handleHomeSubmit} />
+            <HomeForm onHomeSubmit={this.handleHomeSubmit} validateForm={this.state.validForm}/>
           </div>
           <div className="col-xs-12 col-sm-4 text-center"> 
             <h1>Komið nú þegar</h1>
@@ -477,5 +496,6 @@ var MUNICIPALITIES = [
   'Þorlákshöfn',
   'Suðurland',
 ].sort();
+MUNICIPALITIES.push('Útlönd');
 
-React.render(<App url="http://45.79.178.154:1337" />, document.getElementById('app') );
+React.render(<App url="http://localhost:1337" />, document.getElementById('app') );

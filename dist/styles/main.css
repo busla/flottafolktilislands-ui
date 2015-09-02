@@ -7022,3 +7022,9 @@ html {
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }
+
+.alert-success {
+  background-color: #5cb85c !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
