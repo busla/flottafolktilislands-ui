@@ -58,22 +58,13 @@ var HomeForm = React.createClass({
     React.findDOMNode(this.refs.emailGroup).classList.remove('has-success');
     React.findDOMNode(this.refs.emailGroup).classList.add('has-warning');
     React.findDOMNode(this.refs.emailGlyph).classList.add('glyphicon-warning-sign');
-
-    //React.findDOMNode(this.refs.municipality).value = 'Reykjavík';    
-
-
-
   },
 
   changed: function(event){
-    //this.props.onChange(this.props.model.cid, event.target.value);
-    //console.log(event.target.value);
-    //console.log(event.target.id);
     
     switch (event.target.id) {
       case 'ssn':
         if(!Kennitala.validate(event.target.value)) {
-          //console.log('Kennitalan er ekki rétt');
           React.findDOMNode(this.refs.ssn).value = '';
           this.setState({validSsn: false});
         }
@@ -112,7 +103,6 @@ var HomeForm = React.createClass({
       hasWarning: "has-warning form-group has-feedback",
     };
 
-    console.log(this.state.validEmail, this.state.validSsn, this.state.validName);
     var municipalitesList = [];
     for (var i = 0; i < MUNICIPALITIES.length; i++) {
       municipalitesList.push(<MunicipalityOption value={MUNICIPALITIES[i]} key={i}/>);
@@ -274,14 +264,12 @@ var App = React.createClass({
           url: this.props.url+'/home/statistics',
           cache: true,
           success: function(data) {
-            if (this.isMounted()) {
-              console.log(data);
+            if (this.isMounted()) {              
               this.setState({statistics: data})
             }
           }.bind(this),
 
           error: function(xhr, status, err) {
-            console.error(this.props.url, status, err.toString());
           }.bind(this)
         });
   },
@@ -290,25 +278,19 @@ var App = React.createClass({
     this.getStatistics();    
   },
   handleHomeSubmit: function(data) {
-    console.log(data);
     $.ajax({
       url: this.props.url+'/home/create',
       dataType: 'json',
-      //contentType: 'application/json',
       method: 'POST',
       async: true,
-      //processData: false,
       data: data,
 
       success: function(data) {
-        //console.log('SUCCESS: ', data);                 
-        console.log('DATA:', data);
         this.setState({done: true});
         this.getStatistics();    
         
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url+"/home/create", status, err.toString());
       }.bind(this)
     });
   },
@@ -318,13 +300,11 @@ var App = React.createClass({
     var alert = 'Skráningin þín tókst!';
     
     if (this.state.statistics.length === 0) {
-      console.log(this.state.statistics);      
       return (
         null
       );
     }
     else {  
-      console.log(this.state.statistics);
       return(
         <div className="row">
           <div className="col-xs-12 col-sm-4">
