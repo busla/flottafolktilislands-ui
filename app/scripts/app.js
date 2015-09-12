@@ -498,4 +498,4 @@ var MUNICIPALITIES = [
 ].sort();
 MUNICIPALITIES.push('Útlönd');
 
-React.render(<App url="http://localhost:1337" />, document.getElementById('app') );
+React.render(<App url="http://nobordersiceland.org:1337" />, document.getElementById('app') );
