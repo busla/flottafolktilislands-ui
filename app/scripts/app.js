@@ -3,6 +3,8 @@
 var React = require('react');
 var Kennitala = require('kennitala-js');
 
+var config = require('./config.json')[process.env.NODE_ENV || 'development'];
+
 var MunicipalityOption = React.createClass({
   render: function() {
     return (
@@ -477,5 +479,5 @@ var MUNICIPALITIES = [
   'Suðurland',
 ].sort();
 MUNICIPALITIES.push('Útlönd');
-
-React.render(<App url="http://nobordersiceland.org:1337" />, document.getElementById('app') );
+console.log(config.API_URI);
+React.render(<App url={config.API_URI} />, document.getElementById('app') );

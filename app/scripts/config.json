@@ -1,0 +1,8 @@
+{
+    "development": {
+        "API_URI": "http://localhost:1337"        
+    },
+    "production": {
+        "API_URI": "http://flottafolktilislands-api.projects.nonni.cc"
+    }
+}
